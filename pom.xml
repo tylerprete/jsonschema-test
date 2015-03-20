@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.radius</groupId>
+    <artifactId>json-test</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <target_directory>${project.basedir}/src/generated/java</target_directory>
+        <target_package>com.radius.schema</target_package>
+        <anno_style>jackson2</anno_style>
+    </properties>
+
+
+    <build>
+        <sourceDirectory>${target_directory}</sourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <debug>true</debug>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jsonschema2pojo</groupId>
+                <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+                <version>0.4.10</version>
+                <configuration>
+                    <annotationStyle>${anno_style}</annotationStyle>
+                    <generateBuilders>true</generateBuilders>
+                    <includeJsr303Annotations>true</includeJsr303Annotations>
+                    <outputDirectory>${target_directory}</outputDirectory>
+                    <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
+                    <!--
+                    The current generator translates the directory *and* filename into
+                    package and top-level class; so without including "v3_draft" it would
+                    create "com.r.s.m.v3_schema.MatchstickRow"; also, as you might guess
+                    be cognizant of the actual filename, too
+                    -->
+                    <sourceDirectory>${basedir}/src/main/resources/json_schema</sourceDirectory>
+                    <sourceType>jsonschema</sourceType>
+                    <targetPackage>${target_package}</targetPackage>
+                    <useCommonsLang3>true</useCommonsLang3>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.3.2</version>
+        </dependency>
+    </dependencies>
+
+</project>

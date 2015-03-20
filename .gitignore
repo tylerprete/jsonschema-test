@@ -1,0 +1,12 @@
+## IJ
+/.idea
+*.iml
+## Maven
+target
+## Java
+# for now, we are chosing to not register Java sources in Git because
+# they are packaged in ``-sources.jar`` artifacts during installation.
+generated
+## Misc
+*.swp
+*.log

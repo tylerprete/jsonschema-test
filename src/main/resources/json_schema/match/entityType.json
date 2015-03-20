@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$ref": "#/definitions/entityType",
+  "id": "resource:///json_schema/match/entityType.json#",
+  "definitions": {
+    "entityType": {
+      "enum": [ "LEAD", "CONTACT", "ACCOUNT", "OPPORTUNITY", "ROW" ]
+    }
+  }
+}

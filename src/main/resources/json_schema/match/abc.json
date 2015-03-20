@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$ref": "#/definitions/abc",
+  "id": "resource:///json_schema/match/abc.json#",
+  "definitions": {
+    "abc": {
+      "type": "object",
+      "properties": {
+        "entityType": {
+          "$ref": "entityType.json#"
+        }
+      }
+    }
+  }
+}
